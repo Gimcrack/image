@@ -6,7 +6,7 @@ use PHPUnit\Framework\TestCase;
 
 class CircleShapeTest extends TestCase
 {
-    public function tearDown()
+    public function tearDown(): void
     {
         Mockery::close();
     }
@@ -40,7 +40,7 @@ class CircleShapeTest extends TestCase
     public function testImagickApplyToImage()
     {
         $core = Mockery::mock('\Imagick');
-        $core->shouldReceive('drawimage')->once();
+        $core->shouldReceive('drawimage')->once()->andReturn(true);
         $image = Mockery::mock('\Intervention\Image\Image');
         $image->shouldReceive('getCore')->once()->andReturn($core);
         $circle = new CircleImagick(250);

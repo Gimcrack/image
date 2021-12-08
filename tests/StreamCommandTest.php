@@ -4,7 +4,7 @@ use PHPUnit\Framework\TestCase;
 
 class StreamCommandTest extends TestCase
 {
-    public function tearDown()
+    public function tearDown(): void
     {
         Mockery::close();
     }

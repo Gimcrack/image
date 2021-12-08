@@ -5,7 +5,7 @@ use PHPUnit\Framework\TestCase;
 
 class CircleCommandTest extends TestCase
 {
-    public function tearDown()
+    public function tearDown(): void
     {
         Mockery::close();
     }
@@ -27,7 +27,7 @@ class CircleCommandTest extends TestCase
     public function testImagick()
     {
         $imagick = Mockery::mock('\Imagick');
-        $imagick->shouldReceive('drawimage');
+        $imagick->shouldReceive('drawimage')->andReturn(true);
         $driver = Mockery::mock('\Intervention\Image\Imagick\Driver');
         $driver->shouldReceive('getDriverName')->once()->andReturn('Imagick');
         $image = Mockery::mock('\Intervention\Image\Image');

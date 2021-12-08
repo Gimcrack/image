@@ -6,7 +6,7 @@ use PHPUnit\Framework\TestCase;
 
 class MaskCommandTest extends TestCase
 {
-    public function tearDown()
+    public function tearDown(): void
     {
         Mockery::close();
     }

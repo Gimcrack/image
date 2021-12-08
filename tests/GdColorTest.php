@@ -152,32 +152,32 @@ class GdColorTest extends TestCase
     {
         $c = new Color;
         $i = $c->getInt();
-        $this->assertInternalType('int', $i);
+        $this->assertIsInt( $i);
         $this->assertEquals(2147483647, $i);
 
         $c = new Color([255, 255, 255]);
         $i = $c->getInt();
-        $this->assertInternalType('int', $i);
+        $this->assertIsInt( $i);
         $this->assertEquals($i, 16777215);
 
         $c = new Color([255, 255, 255, 1]);
         $i = $c->getInt();
-        $this->assertInternalType('int', $i);
+        $this->assertIsInt( $i);
         $this->assertEquals($i, 16777215);
 
         $c = new Color([181, 55, 23, 0.5]);
         $i = $c->getInt();
-        $this->assertInternalType('int', $i);
+        $this->assertIsInt( $i);
         $this->assertEquals($i, 1085617943);
 
         $c = new Color([181, 55, 23, 1]);
         $i = $c->getInt();
-        $this->assertInternalType('int', $i);
+        $this->assertIsInt( $i);
         $this->assertEquals($i, 11876119);
 
         $c = new Color([0, 0, 0, 0]);
         $i = $c->getInt();
-        $this->assertInternalType('int', $i);
+        $this->assertIsInt( $i);
         $this->assertEquals($i, 2130706432);
     }
 
@@ -273,21 +273,19 @@ class GdColorTest extends TestCase
         $this->assertEquals(false, $c1->differs($c2, 50));
     }
 
-    /**
-     * @expectedException \Intervention\Image\Exception\NotReadableException
-     */
     public function testParseUnknown()
     {
+        $this->expectException(\Intervention\Image\Exception\NotReadableException::class);
         $c = new Color('xxxxxxxxxxxxxxxxxxxx');
     }
 
     private function validateColor($obj, $r, $g, $b, $a)
     {
         $this->assertInstanceOf('Intervention\Image\Gd\Color', $obj);
-        $this->assertInternalType('int', $r);
-        $this->assertInternalType('int', $g);
-        $this->assertInternalType('int', $b);
-        $this->assertInternalType('int', $a);
+        $this->assertIsInt( $r);
+        $this->assertIsInt( $g);
+        $this->assertIsInt( $b);
+        $this->assertIsInt($a);
         $this->assertEquals($obj->r, $r);
         $this->assertEquals($obj->g, $g);
         $this->assertEquals($obj->b, $b);

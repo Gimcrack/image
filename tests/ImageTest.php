@@ -6,7 +6,7 @@ use PHPUnit\Framework\TestCase;
 
 class ImageTest extends TestCase
 {
-    public function tearDown()
+    public function tearDown(): void
     {
         Mockery::close();
     }
@@ -87,11 +87,9 @@ class ImageTest extends TestCase
         $this->assertEquals('image/png', $image->mime());
     }
 
-    /**
-     * @expectedException \Intervention\Image\Exception\RuntimeException
-     */
     public function testGetBackupWithoutBackuo()
     {
+        $this->expectException(\Intervention\Image\Exception\RuntimeException::class);
         $image = $this->getTestImage();
         $image->getBackup();
     }

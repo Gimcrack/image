@@ -5,7 +5,7 @@ use PHPUnit\Framework\TestCase;
 
 class ImagickColorTest extends TestCase
 {
-    public function tearDown()
+    public function tearDown(): void
     {
         Mockery::close();
     }
@@ -187,37 +187,37 @@ class ImagickColorTest extends TestCase
     {
         $c = new Color;
         $i = $c->getInt();
-        $this->assertInternalType('int', $i);
+        $this->assertIsInt($i);
         $this->assertEquals($i, 16777215);
 
         $c = new Color([255, 255, 255]);
         $i = $c->getInt();
-        $this->assertInternalType('int', $i);
+        $this->assertIsInt($i);
         $this->assertEquals($i, 4294967295);
 
         $c = new Color([255, 255, 255, 1]);
         $i = $c->getInt();
-        $this->assertInternalType('int', $i);
+        $this->assertIsInt($i);
         $this->assertEquals($i, 4294967295);
 
         $c = new Color([181, 55, 23, 0.2]);
         $i = $c->getInt();
-        $this->assertInternalType('int', $i);
+        $this->assertIsInt($i);
         $this->assertEquals($i, 867514135);
 
         $c = new Color([255, 255, 255, 0.5]);
         $i = $c->getInt();
-        $this->assertInternalType('int', $i);
+        $this->assertIsInt($i);
         $this->assertEquals($i, 2164260863);
 
         $c = new Color([181, 55, 23, 1]);
         $i = $c->getInt();
-        $this->assertInternalType('int', $i);
+        $this->assertIsInt($i);
         $this->assertEquals($i, 4290066199);
 
         $c = new Color([0, 0, 0, 0]);
         $i = $c->getInt();
-        $this->assertInternalType('int', $i);
+        $this->assertIsInt($i);
         $this->assertEquals($i, 0);
     }
 
@@ -318,11 +318,9 @@ class ImagickColorTest extends TestCase
         $this->assertEquals(false, $c1->differs($c2, 50));
     }
 
-    /**
-     * @expectedException \Intervention\Image\Exception\NotReadableException
-     */
     public function testParseUnknown()
     {
+        $this->expectException(\Intervention\Image\Exception\NotReadableException::class);
         $c = new Color('xxxxxxxxxxxxxxxxxxxx');
     }
 

@@ -6,7 +6,7 @@ use PHPUnit\Framework\TestCase;
 
 class EllipseShapeTest extends TestCase
 {
-    public function tearDown()
+    public function tearDown(): void
     {
         Mockery::close();
     }
@@ -42,13 +42,13 @@ class EllipseShapeTest extends TestCase
 
     public function testImagickApplyToImage()
     {
-        $core = Mockery::mock('\Imagick');
-        $core->shouldReceive('drawimage')->once();
-        $image = Mockery::mock('\Intervention\Image\Image');
+        $core = Mockery::mock(\Imagick::class);
+        $core->shouldReceive('drawimage')->once()->andReturn(true);
+        $image = Mockery::mock(\Intervention\Image\Image::class);
         $image->shouldReceive('getCore')->once()->andReturn($core);
         $ellipse = new EllipseImagick(250, 150);
         $result = $ellipse->applyToImage($image, 10, 20);
-        $this->assertInstanceOf('Intervention\Image\Imagick\Shapes\EllipseShape', $ellipse);
+        $this->assertInstanceOf(EllipseImagick::class, $ellipse);
         $this->assertTrue($result);
     }
 

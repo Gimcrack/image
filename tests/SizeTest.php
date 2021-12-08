@@ -5,7 +5,7 @@ use PHPUnit\Framework\TestCase;
 
 class SizeTest extends TestCase
 {
-    public function tearDown()
+    public function tearDown(): void
     {
         Mockery::close();
     }
@@ -425,11 +425,9 @@ class SizeTest extends TestCase
         $this->assertFalse($fits);
     }
 
-    /**
-     * @expectedException \Intervention\Image\Exception\InvalidArgumentException
-     */
     public function testInvalidResize()
     {
+        $this->expectException(\Intervention\Image\Exception\InvalidArgumentException::class);
         $size = new Size(800, 600);
         $size->resize(null, null);
     }

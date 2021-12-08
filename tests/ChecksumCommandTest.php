@@ -5,7 +5,7 @@ use PHPUnit\Framework\TestCase;
 
 class ChecksumCommandTest extends TestCase
 {
-    public function tearDown()
+    public function tearDown(): void
     {
         Mockery::close();
     }

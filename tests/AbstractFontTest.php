@@ -4,7 +4,7 @@ use PHPUnit\Framework\TestCase;
 
 class AbstractFontTest extends TestCase
 {
-    public function tearDown()
+    public function tearDown(): void
     {
         Mockery::close();
     }
@@ -76,7 +76,7 @@ class AbstractFontTest extends TestCase
         $font = $this->getMockForAbstractClass('\Intervention\Image\AbstractFont');
         $font->text('foo'.PHP_EOL.'bar'.PHP_EOL.'baz');
         $this->assertEquals(3, $font->countLines());
-        $font->text("foo\nbar\nbaz");
+        $font->text("foo\r\nbar\r\nbaz");
         $this->assertEquals(3, $font->countLines());
         $font->text('foo
             bar

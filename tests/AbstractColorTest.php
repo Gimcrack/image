@@ -4,16 +4,14 @@ use PHPUnit\Framework\TestCase;
 
 class AbstractColorTest extends TestCase
 {
-    public function tearDown()
+    public function tearDown(): void
     {
         Mockery::close();
     }
 
-    /**
-     * @expectedException \Intervention\Image\Exception\NotSupportedException
-     */
     public function testFormatUnknown()
     {
+        $this->expectException(\Intervention\Image\Exception\NotSupportedException::class);
         $color = $this->getMockForAbstractClass('\Intervention\Image\AbstractColor');
         $color->format('xxxxxxxxxxxxxxxxxxxxxxx');
     }

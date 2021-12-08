@@ -5,7 +5,7 @@ use PHPUnit\Framework\TestCase;
 
 class ImageManagerTest extends TestCase
 {
-    public function tearDown()
+    public function tearDown(): void
     {
         Mockery::close();
     }

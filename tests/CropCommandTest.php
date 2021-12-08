@@ -6,7 +6,7 @@ use PHPUnit\Framework\TestCase;
 
 class CropCommandTest extends TestCase
 {
-    public function tearDown()
+    public function tearDown(): void
     {
         Mockery::close();
     }
@@ -26,7 +26,7 @@ class CropCommandTest extends TestCase
     {
         $imagick = Mockery::mock('Imagick');
         $imagick->shouldReceive('cropimage')->with(100, 150, 10, 20)->andReturn(true);
-        $imagick->shouldReceive('setimagepage')->with(0, 0, 0, 0)->once();
+        $imagick->shouldReceive('setimagepage')->with(0, 0, 0, 0)->once()->andReturn(true);
         $image = Mockery::mock('Intervention\Image\Image');
         $image->shouldReceive('getCore')->times(2)->andReturn($imagick);
         $command = new CropImagick([100, 150, 10, 20]);

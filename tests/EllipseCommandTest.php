@@ -5,7 +5,7 @@ use PHPUnit\Framework\TestCase;
 
 class EllipseCommandTest extends TestCase
 {
-    public function tearDown()
+    public function tearDown(): void
     {
         Mockery::close();
     }
@@ -26,11 +26,11 @@ class EllipseCommandTest extends TestCase
 
     public function testImagick()
     {
-        $imagick = Mockery::mock('\Imagick');
-        $imagick->shouldReceive('drawimage');
-        $driver = Mockery::mock('\Intervention\Image\Imagick\Driver');
+        $imagick = Mockery::mock(\Imagick::class);
+        $imagick->shouldReceive('drawimage')->andReturn(true);
+        $driver = Mockery::mock(\Intervention\Image\Imagick\Driver::class);
         $driver->shouldReceive('getDriverName')->once()->andReturn('Imagick');
-        $image = Mockery::mock('\Intervention\Image\Image');
+        $image = Mockery::mock(\Intervention\Image\Image::class);
         $image->shouldReceive('getDriver')->once()->andReturn($driver);
         $image->shouldReceive('getCore')->once()->andReturn($imagick);
 
